@@ -13,6 +13,13 @@
     bietet er ein modernes, flüssiges Erlebnis, das sich auf deinem Desktop wie zu Hause anfühlt.
 </p>
 
+<details>
+    <summary>🌐 Sprachen</summary>
+    <ul>
+        <li><a href="../README.md">🇬🇧 English</a></li>
+    </ul>
+</details>
+
 ## 📦 Installation
 
 Gehe zur [WinClicker Releases‐Seite](https://github.com/randomguy-2650/WinClicker/releases), scrolle nach unten zum Abschnitt **Assets** und lade die `.zip`‐Datei herunter, die zu deiner Systemarchitektur passt (x64 oder ARM64).
