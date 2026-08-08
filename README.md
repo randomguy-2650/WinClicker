@@ -13,6 +13,13 @@
     that feels right at home on your desktop.
 </p>
 
+<details>
+    <summary>🌐 Languages</summary>
+    <ul>
+        <li><a href="./Translations/README.de.md">🇩🇪 Deutsch</a></li>
+    </ul>
+</details>
+
 ## 📦 Installation
 
 Go to the [WinClicker Releases page](https://github.com/randomguy-2650/WinClicker/releases), scroll down to the **Assets** section and download the `.zip` file that matches your system architecture (x64 or ARM64).
