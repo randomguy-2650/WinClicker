@@ -1,14 +1,16 @@
 <h1 align="center">
-    <img
-        src="./Assets/cover-image.png"
-        alt="WinClicker: A blazing‐fast autoclicker built with WinUI 3."
-    />
+    <picture>
+        <img
+            src="./Assets/cover-image.png"
+            alt="WinClicker: A blazing‐fast autoclicker built with WinUI 3."
+        />
+    </picture>
 </h1>
 
-<p align="center">
-    <strong>WinClicker</strong> is a high‐performance, lightweight autoclicker
-    designed for Windows 10/11. Built from the ground up using <strong>WinUI 3</strong>,
-    it delivers a modern, fluid experience that feels right at home on your desktop.
+<p>
+    <strong>WinClicker</strong> is a high‐performance, lightweight autoclicker designed for Windows 10/11.<br />
+    Built from the ground up using <strong>WinUI 3</strong>, it delivers a modern, fluid experience
+    that feels right at home on your desktop.
 </p>
 
 ## 📦 Installation
