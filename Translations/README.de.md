@@ -1,20 +1,19 @@
-<h1 align="center">
-    <picture>
-        <img
-            src="../Assets/cover-image-de.png"
-            alt="WinClicker: Ein blitzschneller Autoclicker, entwickelt mit WinUI 3."
-        />
-    </picture>
-</h1>
+<picture align="center">
+    <img
+        src="../Assets/cover-image-de.png"
+        alt=""
+    />
+</picture>
 
-<p>
+<h1 align="center">WinClicker</h1>
+
+<p align="center">
     <strong>WinClicker</strong> ist ein leistungsstarker, leichter Autoclicker,
-    der für Windows 10/11 entwickelt wurde. Von Grund auf mit <strong>WinUI 3</strong> erstellt,
-    bietet er ein modernes, flüssiges Erlebnis, das sich auf deinem Desktop wie zu Hause anfühlt.
+    der für Windows 10/11 entwickelt wurde.
 </p>
 
 <details>
-    <summary>🌐 Sprachen</summary>
+    <summary>🌐 Sprache auswählen</summary>
     <ul>
         <li><a href="../README.md">🇬🇧 English</a></li>
     </ul>
