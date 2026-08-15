@@ -7,7 +7,7 @@ We take security of WinClicker seriously. This explains how to report issues and
 If you discover a security vulnerability in WinClicker, please help by reporting it responsibly.
 
 - Do not open a public issue, pull request or discussion.
-- Instead, please us GitHub’s [private vulnerability reporting](https://docs.github.com/en/code-security/security-advisories) feature.
+- Instead, please use GitHub’s [private vulnerability reporting](https://docs.github.com/en/code-security/security-advisories) feature.
 
 ### 📝 What to include
 
