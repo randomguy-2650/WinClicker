@@ -3,12 +3,19 @@
     x:Class="WinClicker.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:WinClicker.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="using:WinClicker"
+    xmlns:local="using:WinClicker.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:WinClicker.ViewModels"
     xmlns:winuiex="using:WinUIEx"
     Title="WinClicker"
+    Width="480"
+    Height="384"
+    MaxWidth="480"
+    MaxHeight="384"
+    IsMaximizable="False"
+    IsResizable="False"
     mc:Ignorable="d">
     <winuiex:WindowEx.SystemBackdrop>
         <MicaBackdrop />
@@ -16,359 +23,406 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="32" />
-            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <TitleBar
             x:Name="AppTitleBar"
             Title="WinClicker"
             Grid.Row="0"
-            Height="32"
-            VerticalAlignment="Top">
+            VerticalAlignment="Top"
+            BackRequested="AppTitleBar_BackRequested"
+            IsPaneToggleButtonVisible="True"
+            PaneToggleRequested="AppTitleBar_PaneToggleRequested">
             <TitleBar.IconSource>
                 <ImageIconSource x:Name="TitleBarIcon" ImageSource="/Assets/AppIcon.png" />
             </TitleBar.IconSource>
         </TitleBar>
 
-        <ScrollView
+        <NavigationView
+            x:Name="AppNavigationView"
             Grid.Row="1"
-            HorizontalScrollBarVisibility="Auto"
-            VerticalScrollBarVisibility="Auto">
-            <Grid
-                Padding="16"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Top"
-                RowSpacing="16">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+            IsBackButtonVisible="Collapsed"
+            IsPaneToggleButtonVisible="False"
+            PaneDisplayMode="LeftMinimal"
+            SelectionChanged="NavigationView_SelectionChanged">
+            <NavigationView.MenuItems>
+                <NavigationViewItem
+                    x:Name="MainAppNavigationViewItem"
+                    x:Uid="AppNavigationView_ClickerNavigationViewItem"
+                    IsSelected="True">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE8B0;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
 
-                <!--  Click interval  -->
-                <Expander
-                    x:Uid="ClickIntervalExpander"
-                    Grid.Row="0"
-                    HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Stretch"
-                    IsExpanded="True">
-                    <Grid ColumnSpacing="8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox
-                            x:Name="HoursTextBox"
-                            x:Uid="ClickIntervalExpander_HoursTextBox"
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            InputScope="Number"
-                            MaxLength="4"
-                            Tag="9999"
-                            Text="{x:Bind ViewModel.Hours, Mode=TwoWay}"
-                            TextChanged="TextBox_TextChanged" />
-                        <TextBox
-                            x:Name="MinutesTextBox"
-                            x:Uid="ClickIntervalExpander_MinutesTextBox"
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            InputScope="Number"
-                            MaxLength="2"
-                            Tag="59"
-                            Text="{x:Bind ViewModel.Minutes, Mode=TwoWay}"
-                            TextChanged="TextBox_TextChanged" />
-                        <TextBox
-                            x:Name="SecondsTextBox"
-                            x:Uid="ClickIntervalExpander_SecondsTextBox"
-                            Grid.Row="0"
-                            Grid.Column="2"
-                            InputScope="Number"
-                            MaxLength="2"
-                            Tag="59"
-                            Text="{x:Bind ViewModel.Seconds, Mode=TwoWay}"
-                            TextChanged="TextBox_TextChanged" />
-                        <TextBox
-                            x:Name="MillisecondsTextBox"
-                            x:Uid="ClickIntervalExpander_MillisecondsTextBox"
-                            Grid.Row="0"
-                            Grid.Column="3"
-                            InputScope="Number"
-                            MaxLength="3"
-                            Tag="999"
-                            Text="{x:Bind ViewModel.Milliseconds, Mode=TwoWay}"
-                            TextChanged="TextBox_TextChanged" />
-                    </Grid>
-                </Expander>
+            <Grid>
+                <Grid x:Name="MainContentGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                <!--  Click coordinates  -->
-                <!--
-                    Width of 433 epx is derived from window width (480 epx) subtracted
-                    from the grid’s padding and the expander’s internal padding (14 epx in total).
-                    Result is 434 epx but because of subpixel rendering, 433 epx is safer.
-                -->
-                <Expander
-                    x:Uid="ClickCoordinatesExpander"
-                    Grid.Row="1"
-                    Width="433"
-                    HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Stretch">
-                    <StackPanel Orientation="Vertical" Spacing="16">
-                        <Grid ColumnSpacing="8">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="180" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <ComboBox
-                                x:Name="CoordModeComboBox"
-                                x:Uid="ClickCoordinatesExpander_ClickLocationComboBox"
-                                Grid.Column="0"
-                                MinWidth="180"
-                                MaxWidth="180"
-                                SelectedIndex="{x:Bind ViewModel.CoordModeIndex, Mode=TwoWay}">
-                                <ComboBoxItem x:Uid="ClickCoordinatesExpander_ClickLocationCombobox_CurrentMouseLocationComboBoxItem" IsSelected="True" />
-                                <ComboBoxItem x:Uid="ClickCoordinatesExpander_ClickLocationCombobox_CustomCoordinatesComboBoxItem" />
-                            </ComboBox>
-
-                            <Button
-                                Grid.Column="1"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Bottom"
-                                Command="{x:Bind ViewModel.TeleportCommand}">
-                                <TextBlock
-                                    x:Uid="ClickCoordinatesExpander_TeleportButton"
-                                    TextTrimming="CharacterEllipsis"
-                                    TextWrapping="NoWrap" />
-                            </Button>
-                            <Button
-                                Grid.Column="2"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Bottom"
-                                Command="{x:Bind ViewModel.StartPickingCommand}">
-                                <TextBlock
-                                    x:Uid="ClickCoordinatesExpander_PickCoordinatesButton"
-                                    TextTrimming="CharacterEllipsis"
-                                    TextWrapping="NoWrap" />
-                            </Button>
-                        </Grid>
-                        <Grid ColumnSpacing="8">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <TextBox
-                                x:Name="XCoordTextBox"
-                                x:Uid="ClickCoordinatesExpander_XCoordinateTextBox"
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                HorizontalAlignment="Stretch"
-                                InputScope="Number"
-                                MaxLength="4"
-                                Tag="9999"
-                                Text="{x:Bind ViewModel.XCoord, Mode=TwoWay}"
-                                TextChanged="TextBox_TextChanged" />
-                            <TextBox
-                                x:Name="YCoordTextBox"
-                                x:Uid="ClickCoordinatesExpander_YCoordinateTextBox"
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                HorizontalAlignment="Stretch"
-                                InputScope="Number"
-                                MaxLength="4"
-                                Tag="9999"
-                                Text="{x:Bind ViewModel.YCoord, Mode=TwoWay}"
-                                TextChanged="TextBox_TextChanged" />
-                        </Grid>
-                    </StackPanel>
-                </Expander>
-
-                <!--  Click options  -->
-                <Expander
-                    x:Uid="ClickOptionsExpander"
-                    Grid.Row="2"
-                    HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Stretch">
-                    <Grid ColumnSpacing="8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <ComboBox
-                            x:Name="MouseButtonComboBox"
-                            x:Uid="ClickOptionsExpander_MouseButtonComboBox"
-                            Grid.Column="0"
+                    <ScrollView
+                        Grid.Row="0"
+                        HorizontalScrollBarVisibility="Auto"
+                        VerticalScrollBarVisibility="Auto">
+                        <Grid
+                            Padding="16"
                             HorizontalAlignment="Stretch"
-                            SelectedIndex="{x:Bind ViewModel.MouseButtonIndex, Mode=TwoWay}">
-                            <ComboBoxItem x:Uid="ClickOptionsExpander_MouseButtonComboBox_LeftComboBoxItem" />
-                            <ComboBoxItem x:Uid="ClickOptionsExpander_MouseButtonComboBox_RightComboBoxItem" />
-                            <ComboBoxItem x:Uid="ClickOptionsExpander_MouseButtonComboBox_MiddleComboBoxItem" />
-                        </ComboBox>
+                            VerticalAlignment="Top"
+                            RowSpacing="16">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
 
-                        <ComboBox
-                            x:Name="ClickTypeComboBox"
-                            x:Uid="ClickOptionsExpander_ClickTypeComboBox"
-                            Grid.Column="1"
+                            <!--  Click interval  -->
+                            <Expander
+                                x:Uid="ClickIntervalExpander"
+                                Grid.Row="0"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Stretch"
+                                IsExpanded="True">
+                                <StackPanel Orientation="Vertical" Spacing="16">
+                                    <Grid ColumnSpacing="8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox
+                                            x:Name="HoursTextBox"
+                                            x:Uid="ClickIntervalExpander_HoursTextBox"
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            InputScope="Number"
+                                            MaxLength="4"
+                                            Tag="9999"
+                                            Text="{x:Bind ViewModel.Hours, Mode=TwoWay}"
+                                            TextChanged="TextBox_TextChanged" />
+                                        <TextBox
+                                            x:Name="MinutesTextBox"
+                                            x:Uid="ClickIntervalExpander_MinutesTextBox"
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            InputScope="Number"
+                                            MaxLength="2"
+                                            Tag="59"
+                                            Text="{x:Bind ViewModel.Minutes, Mode=TwoWay}"
+                                            TextChanged="TextBox_TextChanged" />
+                                        <TextBox
+                                            x:Name="SecondsTextBox"
+                                            x:Uid="ClickIntervalExpander_SecondsTextBox"
+                                            Grid.Row="0"
+                                            Grid.Column="2"
+                                            InputScope="Number"
+                                            MaxLength="2"
+                                            Tag="59"
+                                            Text="{x:Bind ViewModel.Seconds, Mode=TwoWay}"
+                                            TextChanged="TextBox_TextChanged" />
+                                        <TextBox
+                                            x:Name="MillisecondsTextBox"
+                                            x:Uid="ClickIntervalExpander_MillisecondsTextBox"
+                                            Grid.Row="0"
+                                            Grid.Column="3"
+                                            InputScope="Number"
+                                            MaxLength="3"
+                                            Tag="999"
+                                            Text="{x:Bind ViewModel.Milliseconds, Mode=TwoWay}"
+                                            TextChanged="TextBox_TextChanged" />
+                                    </Grid>
+
+                                    <Grid VerticalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!--  Adjusts vertical alignment of text for optical alignment  -->
+                                        <TextBlock
+                                            x:Name="RandomOffsetLabel"
+                                            x:Uid="ClickIntervalExpander_RandomOffsetLabel"
+                                            Grid.Column="0"
+                                            Margin="0,-4,0,0"
+                                            VerticalAlignment="Center"
+                                            AutomationProperties.AccessibilityView="Raw" />
+
+                                        <Grid
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            ColumnSpacing="12">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="120" MaxWidth="120" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <ToggleSwitch
+                                                x:Uid="ClickIntervalExpander_RandomOffsetToggleSwitch"
+                                                Grid.Column="1"
+                                                MinWidth="0"
+                                                VerticalAlignment="Center"
+                                                IsOn="{x:Bind ViewModel.UseRandomOffset, Mode=TwoWay}"
+                                                Style="{StaticResource LeftContentToggleSwitchStyle}" />
+
+                                            <NumberBox
+                                                Grid.Column="0"
+                                                VerticalAlignment="Center"
+                                                AutomationProperties.LabeledBy="{x:Bind RandomOffsetLabel}"
+                                                LargeChange="100"
+                                                Maximum="1000"
+                                                Minimum="0"
+                                                SmallChange="10"
+                                                SpinButtonPlacementMode="Compact"
+                                                Value="{x:Bind ViewModel.RandomOffsetValue, Mode=TwoWay}" />
+                                        </Grid>
+                                    </Grid>
+                                </StackPanel>
+                            </Expander>
+
+                            <!--  Click coordinates  -->
+                            <!--
+                                Width of 433 epx is derived from window width (480 epx) subtracted
+                                from the grid’s padding and the expander’s internal padding (14 epx in total).
+                                Result is 434 epx but because of subpixel rendering, 433 epx is safer.
+                            -->
+                            <Expander
+                                x:Uid="ClickCoordinatesExpander"
+                                Grid.Row="1"
+                                Width="433"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Stretch">
+                                <StackPanel Orientation="Vertical" Spacing="16">
+                                    <Grid ColumnSpacing="8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="180" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <ComboBox
+                                            x:Name="CoordModeComboBox"
+                                            x:Uid="ClickCoordinatesExpander_ClickLocationComboBox"
+                                            Grid.Column="0"
+                                            MinWidth="180"
+                                            MaxWidth="180"
+                                            SelectedIndex="{x:Bind ViewModel.CoordModeIndex, Mode=TwoWay}">
+                                            <ComboBoxItem x:Uid="ClickCoordinatesExpander_ClickLocationCombobox_CurrentMouseLocationComboBoxItem" IsSelected="True" />
+                                            <ComboBoxItem x:Uid="ClickCoordinatesExpander_ClickLocationCombobox_CustomCoordinatesComboBoxItem" />
+                                        </ComboBox>
+
+                                        <Button
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Bottom"
+                                            Command="{x:Bind ViewModel.TeleportCommand}">
+                                            <TextBlock
+                                                x:Uid="ClickCoordinatesExpander_TeleportButton"
+                                                TextTrimming="CharacterEllipsis"
+                                                TextWrapping="NoWrap" />
+                                        </Button>
+                                        <Button
+                                            Grid.Column="2"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Bottom"
+                                            Command="{x:Bind ViewModel.StartPickingCommand}">
+                                            <TextBlock
+                                                x:Uid="ClickCoordinatesExpander_PickCoordinatesButton"
+                                                TextTrimming="CharacterEllipsis"
+                                                TextWrapping="NoWrap" />
+                                        </Button>
+                                    </Grid>
+                                    <Grid ColumnSpacing="8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBox
+                                            x:Name="XCoordTextBox"
+                                            x:Uid="ClickCoordinatesExpander_XCoordinateTextBox"
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            HorizontalAlignment="Stretch"
+                                            InputScope="Number"
+                                            MaxLength="4"
+                                            Tag="9999"
+                                            Text="{x:Bind ViewModel.XCoord, Mode=TwoWay}"
+                                            TextChanged="TextBox_TextChanged" />
+                                        <TextBox
+                                            x:Name="YCoordTextBox"
+                                            x:Uid="ClickCoordinatesExpander_YCoordinateTextBox"
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Stretch"
+                                            InputScope="Number"
+                                            MaxLength="4"
+                                            Tag="9999"
+                                            Text="{x:Bind ViewModel.YCoord, Mode=TwoWay}"
+                                            TextChanged="TextBox_TextChanged" />
+                                    </Grid>
+                                </StackPanel>
+                            </Expander>
+
+                            <!--  Click options  -->
+                            <Expander
+                                x:Uid="ClickOptionsExpander"
+                                Grid.Row="2"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Stretch">
+                                <StackPanel Orientation="Vertical" Spacing="16">
+                                    <Grid ColumnSpacing="8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <ComboBox
+                                            x:Name="MouseButtonComboBox"
+                                            x:Uid="ClickOptionsExpander_MouseButtonComboBox"
+                                            Grid.Column="0"
+                                            HorizontalAlignment="Stretch"
+                                            SelectedIndex="{x:Bind ViewModel.MouseButtonIndex, Mode=TwoWay}">
+                                            <ComboBoxItem x:Uid="ClickOptionsExpander_MouseButtonComboBox_LeftComboBoxItem" />
+                                            <ComboBoxItem x:Uid="ClickOptionsExpander_MouseButtonComboBox_RightComboBoxItem" />
+                                            <ComboBoxItem x:Uid="ClickOptionsExpander_MouseButtonComboBox_MiddleComboBoxItem" />
+                                        </ComboBox>
+
+                                        <ComboBox
+                                            x:Name="ClickTypeComboBox"
+                                            x:Uid="ClickOptionsExpander_ClickTypeComboBox"
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Stretch"
+                                            SelectedIndex="{x:Bind ViewModel.ClickTypeIndex, Mode=TwoWay}">
+                                            <ComboBoxItem x:Uid="ClickOptionsExpander_ClickTypeComboBox_SingleComboBoxItem" />
+                                            <ComboBoxItem x:Uid="ClickOptionsExpander_ClickTypeComboBox_DoubleComboBoxItem" />
+                                        </ComboBox>
+                                    </Grid>
+
+                                    <Border
+                                        Height="1"
+                                        Margin="-16,0,-16,0"
+                                        BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
+                                        BorderThickness="1" />
+
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="120" MaxWidth="120" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <RadioButtons
+                                            x:Uid="ClickOptionsExpander_ClickRepeatRadioButtons"
+                                            Grid.Column="0"
+                                            SelectedIndex="{x:Bind ViewModel.ClickRepeatIndex, Mode=TwoWay}">
+                                            <RadioButton x:Uid="ClickOptionsExpander_ClickRepeatRadioButtons_ContinuouslyRadioButton" />
+                                            <RadioButton x:Uid="ClickOptionsExpander_ClickRepeatRadioButtons_CustomCountRadioButton" />
+                                        </RadioButtons>
+
+                                        <NumberBox
+                                            x:Uid="ClickOptionsExpander_CustomRepeatCountNumberBox"
+                                            Grid.Column="1"
+                                            Width="120"
+                                            MaxWidth="120"
+                                            VerticalAlignment="Bottom"
+                                            IsEnabled="{x:Bind ViewModel.IsCustomRepeat, Mode=OneWay}"
+                                            LargeChange="10"
+                                            Minimum="1"
+                                            SmallChange="1"
+                                            SpinButtonPlacementMode="Compact"
+                                            Value="{x:Bind ViewModel.RepeatCount, Mode=TwoWay}" />
+                                    </Grid>
+                                </StackPanel>
+                            </Expander>
+
+                            <!--  Shortcut settings  -->
+                            <controls:ExpanderCard x:Uid="ShortcutSettingsCard" Grid.Row="3">
+                                <controls:ExpanderCard.ActionButton>
+                                    <Button
+                                        x:Uid="ShortcutSettingsCard_ActionButton"
+                                        Command="{x:Bind ViewModel.OpenShortcutDialogCommand}"
+                                        IsEnabled="{x:Bind ViewModel.IsNotClicking, Mode=OneWay}"
+                                        Style="{StaticResource ExpanderCardButtonStyle}">
+                                        <FontIcon FontSize="12" Glyph="&#xE70F;" />
+                                    </Button>
+                                </controls:ExpanderCard.ActionButton>
+                            </controls:ExpanderCard>
+                        </Grid>
+                    </ScrollView>
+
+                    <Border
+                        Grid.Row="1"
+                        Padding="16"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Bottom"
+                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="0,1,0,0">
+                        <Grid
                             HorizontalAlignment="Stretch"
-                            SelectedIndex="{x:Bind ViewModel.ClickTypeIndex, Mode=TwoWay}">
-                            <ComboBoxItem x:Uid="ClickOptionsExpander_ClickTypeComboBox_SingleComboBoxItem" />
-                            <ComboBoxItem x:Uid="ClickOptionsExpander_ClickTypeComboBox_DoubleComboBoxItem" />
-                        </ComboBox>
-                    </Grid>
-                </Expander>
-
-                <!--  Hotkey settings  -->
-                <!--
-                    Width of 433 epx is derived from window width (480 epx) subtracted
-                    from the grid’s padding and the expander’s internal padding (14 epx in total).
-                    Result is 434 epx but because of subpixel rendering, 433 epx is safer.
-                -->
-                <Expander
-                    x:Uid="HotkeySettingsExpander"
-                    Grid.Row="3"
-                    Width="433"
-                    HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Stretch">
-                    <Grid HorizontalAlignment="Stretch" RowSpacing="8">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <TextBox
-                            x:Name="HotkeyTextBox"
-                            Grid.Row="1"
                             VerticalAlignment="Center"
-                            AutomationProperties.LabeledBy="{x:Bind HotkeyTextBoxLabel}"
-                            Text="{x:Bind ViewModel.Hotkey, Mode=TwoWay}"
-                            TextWrapping="NoWrap" />
-
-                        <StackPanel
-                            Grid.Row="0"
-                            Orientation="Horizontal"
-                            Spacing="8">
-                            <TextBlock
-                                x:Name="HotkeyTextBoxLabel"
-                                x:Uid="HotkeySettingsExpander_StartStopHotkeyTextBlock"
-                                AutomationProperties.AccessibilityView="Raw"
-                                Style="{StaticResource BodyTextBlockStyle}" />
+                            ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
                             <Button
-                                x:Name="HotkeyInfoButton"
-                                x:Uid="HotkeySettingsExpander_HotkeySyntaxButton"
-                                Click="HotkeyInfoButton_Click"
-                                Style="{StaticResource InfoButtonStyle}">
-                                <FontIcon
-                                    FontSize="14"
-                                    Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
-                                    Glyph="&#xE946;" />
+                                x:Name="StartButton"
+                                Grid.Column="0"
+                                Height="40"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                AutomationProperties.Name="{x:Bind StartButtonText.Text, Mode=OneWay}"
+                                Command="{x:Bind ViewModel.StartClickingCommand}"
+                                IsEnabled="{x:Bind ViewModel.IsNotClicking, Mode=OneWay}">
+                                <StackPanel
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal"
+                                    Spacing="8">
+                                    <FontIcon FontSize="16" Glyph="&#xE768;" />
+                                    <TextBlock
+                                        x:Name="StartButtonText"
+                                        x:Uid="Footer_StartButton"
+                                        VerticalAlignment="Center" />
+                                </StackPanel>
                             </Button>
+                            <Button
+                                x:Name="StopButton"
+                                Grid.Column="1"
+                                Height="40"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Center"
+                                AutomationProperties.Name="{x:Bind StopButtonText.Text, Mode=OneWay}"
+                                Command="{x:Bind ViewModel.StopClickingCommand}"
+                                IsEnabled="{x:Bind ViewModel.IsClicking, Mode=OneWay}">
+                                <StackPanel
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal"
+                                    Spacing="8">
+                                    <FontIcon FontSize="16" Glyph="&#xE71A;" />
+                                    <TextBlock
+                                        x:Name="StopButtonText"
+                                        x:Uid="Footer_StopButton"
+                                        VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </Border>
+                </Grid>
 
-                            <TeachingTip
-                                x:Name="HotkeyTeachingTip"
-                                x:Uid="HotkeySettingsExpander_HotkeySyntaxTeachingTip"
-                                PreferredPlacement="RightTop"
-                                ShouldConstrainToRootBounds="False"
-                                Target="{x:Bind HotkeyInfoButton}">
-                                <TeachingTip.Content>
-                                    <StackPanel Margin="0,12,0,0" Spacing="12">
-                                        <TextBlock x:Uid="HotkeySettingsExpander_HotkeySyntaxTeachingTip_Introduction" TextWrapping="WrapWholeWords" />
-
-                                        <TextBlock TextWrapping="WrapWholeWords">
-                                            <Run x:Uid="HotkeySettingsExpander_HotkeySyntaxTeachingTip_Modifiers" FontWeight="SemiBold" />
-                                            <Run Text="Ctrl, Shift, Alt, Win" />
-                                        </TextBlock>
-
-                                        <TextBlock TextWrapping="WrapWholeWords">
-                                            <Run x:Uid="HotkeySettingsExpander_HotkeySyntaxTeachingTip_Alphanumeric" FontWeight="SemiBold" />
-                                            <Run Text="A–Z, 0–9, F1–F24" />
-                                        </TextBlock>
-
-                                        <TextBlock TextWrapping="WrapWholeWords">
-                                            <Run x:Uid="HotkeySettingsExpander_HotkeySyntaxTeachingTip_NavigationSpecial" FontWeight="SemiBold" />
-                                            <Run Text="Enter, Tab, Backspace, ArrowUp, ArrowDown, ArrowLeft, ArrowRight" />
-                                        </TextBlock>
-
-                                        <TextBlock TextWrapping="WrapWholeWords">
-                                            <Run x:Uid="HotkeySettingsExpander_HotkeySyntaxTeachingTip_Numpad" FontWeight="SemiBold" />
-                                            <Run Text="Num0–Num9" />
-                                        </TextBlock>
-
-                                        <TextBlock x:Uid="HotkeySettingsExpander_HotkeySyntaxTeachingTip_Notice" Style="{StaticResource CaptionTextBlockStyle}" />
-                                    </StackPanel>
-                                </TeachingTip.Content>
-                            </TeachingTip>
-                        </StackPanel>
-                    </Grid>
-                </Expander>
+                <Grid x:Name="SettingsPopup" Visibility="Collapsed">
+                    <local:SettingsView
+                        x:Name="SettingsView"
+                        Width="466"
+                        Height="345" />
+                </Grid>
             </Grid>
-        </ScrollView>
-
-        <Border
-            Grid.Row="2"
-            Padding="16"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Bottom"
-            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-            BorderThickness="0,1,0,0">
-            <Grid
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Center"
-                ColumnSpacing="8">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <Button
-                    x:Name="StartButton"
-                    Grid.Column="0"
-                    Height="40"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"
-                    AutomationProperties.Name="{x:Bind StartButtonText.Text, Mode=OneWay}"
-                    Command="{x:Bind ViewModel.StartClickingCommand}"
-                    IsEnabled="{x:Bind ViewModel.IsNotClicking, Mode=OneWay}">
-                    <StackPanel
-                        HorizontalAlignment="Center"
-                        Orientation="Horizontal"
-                        Spacing="8">
-                        <FontIcon FontSize="16" Glyph="&#xE768;" />
-                        <TextBlock
-                            x:Name="StartButtonText"
-                            x:Uid="Footer_StartButton"
-                            VerticalAlignment="Center" />
-                    </StackPanel>
-                </Button>
-                <Button
-                    x:Name="StopButton"
-                    Grid.Column="1"
-                    Height="40"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"
-                    AutomationProperties.Name="{x:Bind StopButtonText.Text, Mode=OneWay}"
-                    Command="{x:Bind ViewModel.StopClickingCommand}"
-                    IsEnabled="{x:Bind ViewModel.IsClicking, Mode=OneWay}">
-                    <StackPanel
-                        HorizontalAlignment="Center"
-                        Orientation="Horizontal"
-                        Spacing="8">
-                        <FontIcon FontSize="16" Glyph="&#xE71A;" />
-                        <TextBlock
-                            x:Name="StopButtonText"
-                            x:Uid="Footer_StopButton"
-                            VerticalAlignment="Center" />
-                    </StackPanel>
-                </Button>
-            </Grid>
-        </Border>
+        </NavigationView>
     </Grid>
 </winuiex:WindowEx>

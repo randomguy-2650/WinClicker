@@ -1,5 +1,7 @@
 # Security
 
+<!-- Do not translate this file. -->
+
 We take security of WinClicker seriously. This explains how to report issues and what you can expect from us.
 
 ## 🐞 Reporting a vulnerability

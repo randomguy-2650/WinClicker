@@ -11,49 +11,57 @@
     d:DesignWidth="124"
     Background="Transparent"
     mc:Ignorable="d">
-    <Grid
-        HorizontalAlignment="Stretch"
-        VerticalAlignment="Center"
-        Background="Transparent"
-        ColumnSpacing="8"
-        CornerRadius="{StaticResource OverlayCornerRadius}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <Grid>
+        <Image
+            AutomationProperties.AccessibilityView="Raw"
+            Opacity="0.02"
+            Source="/Assets/NoiseAsset.png"
+            Stretch="Fill" />
 
-        <TextBlock
-            Grid.Row="0"
-            Grid.Column="0"
-            Margin="12,12,12,0"
-            Style="{StaticResource BodyStrongTextBlockStyle}"
-            Text="X" />
-        <TextBlock
-            x:Name="XValue"
-            Grid.Row="0"
-            Grid.Column="1"
-            Margin="0,12,12,0"
-            Style="{StaticResource BodyTextBlockStyle}"
-            Text="{x:Bind ViewModel.X, Mode=OneWay}"
-            Typography.NumeralAlignment="Tabular" />
+        <Grid
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center"
+            Background="Transparent"
+            ColumnSpacing="8"
+            CornerRadius="{StaticResource OverlayCornerRadius}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <TextBlock
-            Grid.Row="1"
-            Grid.Column="0"
-            Margin="12,0,12,12"
-            Style="{StaticResource BodyStrongTextBlockStyle}"
-            Text="Y" />
-        <TextBlock
-            x:Name="YValue"
-            Grid.Row="1"
-            Grid.Column="1"
-            Margin="0,0,12,12"
-            Style="{StaticResource BodyTextBlockStyle}"
-            Text="{x:Bind ViewModel.Y, Mode=OneWay}"
-            Typography.NumeralAlignment="Tabular" />
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="12,12,12,0"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="X" />
+            <TextBlock
+                x:Name="XValue"
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="0,12,12,0"
+                Style="{StaticResource BodyTextBlockStyle}"
+                Text="{x:Bind ViewModel.X, Mode=OneWay}"
+                Typography.NumeralAlignment="Tabular" />
+
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="12,0,12,12"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="Y" />
+            <TextBlock
+                x:Name="YValue"
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="0,0,12,12"
+                Style="{StaticResource BodyTextBlockStyle}"
+                Text="{x:Bind ViewModel.Y, Mode=OneWay}"
+                Typography.NumeralAlignment="Tabular" />
+        </Grid>
     </Grid>
 </UserControl>

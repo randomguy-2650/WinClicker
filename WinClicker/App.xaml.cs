@@ -19,7 +19,7 @@ namespace WinClicker
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>
@@ -37,6 +37,6 @@ namespace WinClicker
             Environment.Exit(0);
         }
 
-        private Window? m_window;
+        public Window? m_window;
     }
 }

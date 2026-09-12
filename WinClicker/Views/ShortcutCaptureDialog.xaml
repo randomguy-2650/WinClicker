@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentDialog
+    x:Class="WinClicker.Views.ShortcutCaptureDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:WinClicker.Models"
+    xmlns:viewModels="using:WinClicker.ViewModels"
+    x:Uid="ShortcutCaptureDialog"
+    d:DataContext="{d:DesignInstance Type=viewModels:ShortcutCaptureDialogViewModel}"
+    DefaultButton="Primary"
+    IsPrimaryButtonEnabled="{x:Bind ViewModel.IsPrimaryButtonEnabled, Mode=OneWay}"
+    mc:Ignorable="d">
+    <StackPanel Orientation="Vertical">
+        <TextBlock x:Name="ShortcutCaptureDescription" TextWrapping="Wrap" />
+
+        <Grid
+            MinHeight="88"
+            Margin="0,16,0,0"
+            Background="{ThemeResource SolidBackgroundFillColorTertiaryBrush}"
+            CornerRadius="{StaticResource OverlayCornerRadius}">
+            <ItemsControl
+                x:Name="KeyCapContainer"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                ItemsSource="{x:Bind ViewModel.KeyCaps, Mode=OneWay}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Spacing="8" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="models:ShortcutKeyItem">
+                        <Grid
+                            x:Name="KeycapGrid"
+                            Height="48"
+                            MinWidth="16"
+                            Margin="0,20,0,20"
+                            Padding="20,0,20,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Background="{ThemeResource AccentFillColorDefaultBrush}"
+                            BackgroundSizing="OuterBorderEdge"
+                            BorderBrush="{ThemeResource AccentControlElevationBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{ThemeResource OverlayCornerRadius}">
+                            <Grid.BackgroundTransition>
+                                <BrushTransition Duration="0:0:0.083" />
+                            </Grid.BackgroundTransition>
+
+                            <interactivity:Interaction.Behaviors>
+                                <interactivity:DataTriggerBehavior Binding="{x:Bind IsInvalid, Mode=OneTime}" Value="True">
+                                    <interactivity:GoToStateAction StateName="InvalidState" />
+                                </interactivity:DataTriggerBehavior>
+                                <interactivity:DataTriggerBehavior Binding="{x:Bind IsInvalid, Mode=OneTime}" Value="False">
+                                    <interactivity:GoToStateAction StateName="NormalState" />
+                                </interactivity:DataTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>
+
+                            <FontIcon
+                                x:Name="KeyFontIcon"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                AutomationProperties.Name="{x:Bind DisplayName, Mode=OneTime}"
+                                FontSize="16"
+                                Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"
+                                Glyph="{x:Bind Glyph, Mode=OneTime}"
+                                Visibility="{x:Bind GlyphVisibility, Mode=OneTime}" />
+
+                            <PathIcon
+                                x:Name="KeyPathIcon"
+                                Width="16"
+                                Height="16"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                AutomationProperties.Name="{x:Bind DisplayName, Mode=OneTime}"
+                                Data="{x:Bind IconGeometry, Mode=OneTime}"
+                                Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"
+                                Visibility="{x:Bind PathVisibility, Mode=OneTime}" />
+
+                            <TextBlock
+                                x:Name="KeyText"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                FontWeight="SemiBold"
+                                Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}"
+                                Text="{x:Bind DisplayName, Mode=OneTime}"
+                                Visibility="{x:Bind TextVisibility, Mode=OneTime}" />
+
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="ValidityStates">
+                                    <VisualState x:Name="NormalState" />
+                                    <VisualState x:Name="InvalidState">
+                                        <VisualState.Setters>
+                                            <Setter Target="KeycapGrid.Background" Value="{ThemeResource SystemFillColorCriticalBackgroundBrush}" />
+                                            <Setter Target="KeycapGrid.BorderBrush" Value="{ThemeResource SystemFillColorCriticalBrush}" />
+                                            <Setter Target="KeyText.Foreground" Value="{ThemeResource SystemFillColorCriticalBrush}" />
+                                            <Setter Target="KeyFontIcon.Foreground" Value="{ThemeResource SystemFillColorCriticalBrush}" />
+                                            <Setter Target="KeyPathIcon.Foreground" Value="{ThemeResource SystemFillColorCriticalBrush}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+
+        <StackPanel
+            Margin="0,8,0,0"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal"
+            Spacing="8">
+            <Button
+                AutomationProperties.Name="{x:Bind ResetButtonText.Text, Mode=OneWay}"
+                Command="{x:Bind ViewModel.ResetToDefaultCommand}"
+                Style="{StaticResource SubtleButtonStyle}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <FontIcon FontSize="12" Glyph="&#xE777;" />
+                    <TextBlock
+                        x:Name="ResetButtonText"
+                        x:Uid="ShortcutCaptureDialog_ResetButtonText"
+                        FontSize="12" />
+                </StackPanel>
+            </Button>
+            <Button
+                AutomationProperties.Name="{x:Bind ClearButtonText.Text, Mode=OneWay}"
+                Command="{x:Bind ViewModel.ClearCommand}"
+                Style="{StaticResource SubtleButtonStyle}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <FontIcon FontSize="12" Glyph="&#xE894;" />
+                    <TextBlock
+                        x:Name="ClearButtonText"
+                        x:Uid="ShortcutCaptureDialog_ClearButtonText"
+                        FontSize="12" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</ContentDialog>

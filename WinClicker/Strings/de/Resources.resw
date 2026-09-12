@@ -119,109 +119,210 @@
   </resheader>
   <data name="ClickCoordinatesExpander.Header" xml:space="preserve">
     <value>Klickkoordinaten</value>
+    <comment>Header text for the Click coordinates expander.</comment>
   </data>
   <data name="ClickCoordinatesExpander_ClickLocationComboBox.Header" xml:space="preserve">
     <value>Klickposition</value>
+    <comment>Header for the combobox selecting where clicks should occur.</comment>
   </data>
   <data name="ClickCoordinatesExpander_ClickLocationComboBox_CurrentMouseLocationComboBoxItem.Content" xml:space="preserve">
     <value>Aktuelle Mausposition</value>
+    <comment>Combobox item to target the current mouse pointer position.</comment>
   </data>
   <data name="ClickCoordinatesExpander_ClickLocationComboBox_CustomCoordinatesComboBoxItem.Content" xml:space="preserve">
     <value>Benutzerdefinierte Koordinaten</value>
+    <comment>Button text to interactively pick screen coordinates.</comment>
   </data>
   <data name="ClickCoordinatesExpander_PickCoordinatesButton.Text" xml:space="preserve">
     <value>Punkt wählen</value>
+    <comment>Button text to interactively pick screen coordinates.</comment>
   </data>
   <data name="ClickCoordinatesExpander_TeleportButton.Text" xml:space="preserve">
     <value>Teleportieren</value>
+    <comment>Button text to instantly teleport the mouse pointer to the set coordinates.</comment>
   </data>
   <data name="ClickCoordinatesExpander_XCoordinateTextBox.Header" xml:space="preserve">
     <value>X‐Koordinate</value>
+    <comment>Text box header for the horizontal X screen coordinate.</comment>
   </data>
   <data name="ClickCoordinatesExpander_YCoordinateTextBox.Header" xml:space="preserve">
     <value>Y‐Koordinate</value>
+    <comment>Text box header for the vertical Y screen coordinate.</comment>
   </data>
   <data name="ClickIntervalExpander.Header" xml:space="preserve">
     <value>Klickintervall</value>
+    <comment>Header text for the Click interval expander.</comment>
   </data>
   <data name="ClickIntervalExpander_HoursTextBox.Header" xml:space="preserve">
     <value>Stunden</value>
+    <comment>Text box header for Hours component of the click interval.</comment>
   </data>
   <data name="ClickIntervalExpander_MillisecondsTextBox.Header" xml:space="preserve">
     <value>Millisekunden</value>
+    <comment>Text box header for Milliseconds component of the click interval.</comment>
   </data>
   <data name="ClickIntervalExpander_MinutesTextBox.Header" xml:space="preserve">
     <value>Minuten</value>
+    <comment>Text box header for Minutes component of the click interval.</comment>
   </data>
   <data name="ClickIntervalExpander_SecondsTextBox.Header" xml:space="preserve">
     <value>Sekunden</value>
+    <comment>Text box header for Seconds component of the click interval.</comment>
   </data>
   <data name="ClickOptionsExpander.Header" xml:space="preserve">
     <value>Klickoptionen</value>
+    <comment>Header text for the Click options expander.</comment>
   </data>
   <data name="ClickOptionsExpander_ClickTypeComboBox.Header" xml:space="preserve">
     <value>Klicktyp</value>
+    <comment>Combobox header for selecting single or double click action.</comment>
   </data>
   <data name="ClickOptionsExpander_ClickTypeComboBox_DoubleComboBoxItem.Content" xml:space="preserve">
     <value>Doppelklick</value>
+    <comment>Combobox option for a double‐click action.</comment>
   </data>
   <data name="ClickOptionsExpander_ClickTypeComboBox_SingleComboBoxItem.Content" xml:space="preserve">
     <value>Einfachklick</value>
+    <comment>Combobox option for a single‐click action.</comment>
   </data>
   <data name="ClickOptionsExpander_MouseButtonComboBox.Header" xml:space="preserve">
     <value>Maustaste</value>
+    <comment>Combobox header for selecting which mouse button to use.</comment>
   </data>
   <data name="ClickOptionsExpander_MouseButtonComboBox_LeftComboBoxItem.Content" xml:space="preserve">
     <value>Links</value>
+    <comment>Combobox option for left mouse button.</comment>
   </data>
   <data name="ClickOptionsExpander_MouseButtonComboBox_MiddleComboBoxItem.Content" xml:space="preserve">
     <value>Mittel</value>
+    <comment>Combobox option for middle mouse button.</comment>
   </data>
   <data name="ClickOptionsExpander_MouseButtonComboBox_RightComboBoxItem.Content" xml:space="preserve">
     <value>Rechts</value>
+    <comment>Combobox option for right mouse button.</comment>
   </data>
-  <data name="HotkeySettingsExpander.Header" xml:space="preserve">
-    <value>Hotkey‐Einstellungen</value>
-  </data>
-  <data name="HotkeySettingsExpander_HotkeySyntaxButton.AutomationProperties.Name" xml:space="preserve">
-    <value>Hotkey‐Syntax</value>
-  </data>
-  <data name="HotkeySettingsExpander_HotkeySyntaxButton.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Hotkey‐Syntax</value>
-  </data>
-  <data name="HotkeySettingsExpander_HotkeySyntaxTeachingTip.Title" xml:space="preserve">
-    <value>Hotkey‐Syntax</value>
-  </data>
-  <data name="HotkeySettingsExpander_StartStopHotkeyTextBlock.Text" xml:space="preserve">
-    <value>Start‐/Stopp‐Hotkey</value>
-  </data>
-  <data name="HotkeySettingsExpander_HotkeySyntaxTeachingTip_Alphanumeric.Text" xml:space="preserve">
-    <value>Alphanumerisch:</value>
-    <comment>Include the colon after the text (“:”).</comment>
-  </data>
-  <data name="HotkeySettingsExpander_HotkeySyntaxTeachingTip_Introduction.Text" xml:space="preserve">
-    <value>Nutze + zum Verbinden von Tasten (keine Leerzeichen). Beispiel: Ctrl+Shift+C</value>
-    <comment>The space between “Example:” and “Ctrl+Shift+C” is a non‐breaking space.</comment>
-  </data>
-  <data name="HotkeySettingsExpander_HotkeySyntaxTeachingTip_Modifiers.Text" xml:space="preserve">
-    <value>Modifikatoren:</value>
-    <comment>Include the colon after the text (“:”).</comment>
-  </data>
-  <data name="HotkeySettingsExpander_HotkeySyntaxTeachingTip_NavigationSpecial.Text" xml:space="preserve">
-    <value>Navigation &amp; Sonstiges:</value>
-    <comment>Include the colon after the text (“:”).</comment>
-  </data>
-  <data name="HotkeySettingsExpander_HotkeySyntaxTeachingTip_Numpad.Text" xml:space="preserve">
-    <value>Nummernblock:</value>
-    <comment>Include the colon and space after the text (“: ”).</comment>
+  <data name="ShortcutSettingsCard.Header" xml:space="preserve">
+    <value>Tastenkombinationen</value>
+    <comment>Header text for the global shortcut settings expander card.</comment>
   </data>
   <data name="Footer_StartButton.Text" xml:space="preserve">
     <value>Start</value>
+    <comment>Main action button text to start the autoclicker.</comment>
   </data>
   <data name="Footer_StopButton.Text" xml:space="preserve">
     <value>Stopp</value>
+    <comment>Main action button text to stop the autoclicker.</comment>
   </data>
-  <data name="HotkeySettingsExpander_HotkeySyntaxTeachingTip_Notice.Text" xml:space="preserve">
-    <value>Änderungen werden übernommen, sobald das Textfeld nicht mehr fokussiert ist.</value>
+  <data name="AppNavigationView_ClickerNavigationViewItem.Content" xml:space="preserve">
+    <value>Clicker</value>
+    <comment>Navigation item label for the main Clicker page.</comment>
+  </data>
+  <data name="SettingsView_Title.Text" xml:space="preserve">
+    <value>Einstellungen</value>
+    <comment>Page title for the settings view.</comment>
+  </data>
+  <data name="SettingsView_AppearanceSectionHeader.Text" xml:space="preserve">
+    <value>Aussehen</value>
+    <comment>Settings section header grouping visual customisation settings.</comment>
+  </data>
+  <data name="SettingsView_AppThemeSettingsExpander.Header" xml:space="preserve">
+    <value>App‐Modus</value>
+    <comment>Header text for the app theme settings card.</comment>
+  </data>
+  <data name="SettingsView_AppThemeSettingsExpander.Description" xml:space="preserve">
+    <value>Wähle den App‐Modus aus</value>
+    <comment>Subtitle description explaining the app theme settings card.</comment>
+  </data>
+  <data name="SettingsView_AppThemeSettingsExpander_LightRadioButton.Content" xml:space="preserve">
+    <value>Hell</value>
+    <comment>Radio button option to force light mode theme in the app theme settings card.</comment>
+  </data>
+  <data name="SettingsView_AppThemeSettingsExpander_DarkRadioButton.Content" xml:space="preserve">
+    <value>Dunkel</value>
+    <comment>Radio button option to force dark mode theme in the app theme settings card.</comment>
+  </data>
+  <data name="SettingsView_AppThemeSettingsExpander_UseSystemSettingRadioButton.Content" xml:space="preserve">
+    <value>Systemeinstellung verwenden</value>
+    <comment>Radio button option tomatch the operating system theme in the app theme settings card.</comment>
+  </data>
+  <data name="SettingsView_AboutSectionHeader.Text" xml:space="preserve">
+    <value>Info</value>
+    <comment>Settings section header grouping application details and licences.</comment>
+  </data>
+  <data name="SettingsView_WinClickerSettingsExpander.Description" xml:space="preserve">
+    <value>© 2026 randomguy-2650 und Mitwirkende</value>
+    <comment>Copyright notice and version info footer string</comment>
+  </data>
+  <data name="SettingsView_WinClickerSettingsExpander_GitHubRepositoryHyperlinkButton.Content" xml:space="preserve">
+    <value>GitHub‐Repository</value>
+    <comment>Link text pointing to the GitHub repository.</comment>
+  </data>
+  <data name="SettingsView_WinClickerSettingsExpander_MITLicenseHyperlinkButton.Content" xml:space="preserve">
+    <value>MIT‐Lizenz</value>
+    <comment>Link text pointing to the software licensing details.</comment>
+  </data>
+  <data name="SettingsView_WinClickerSettingsExpander_ThirdPartyNoticesHyperlinkButton.Content" xml:space="preserve">
+    <value>Drittanbieter‐Lizenzen</value>
+    <comment>Link text pointing to third‐party dependency disclosures.</comment>
+  </data>
+  <data name="ShortcutSettingsCard_ActionButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Tastenkombination ändern</value>
+    <comment>Hover tooltip text for the shortcut edit action button.</comment>
+  </data>
+  <data name="ShortcutSettingsCard_ActionButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Tastenkombination ändern</value>
+    <comment>Screen reader name for the shortcut edit action button.</comment>
+  </data>
+  <data name="ShortcutCaptureDialog_Description.Text" xml:space="preserve">
+    <value>Eine Tastenkombination sollte mit der **Windows‐Taste**, **Strg**, **Alt** oder **Shift** beginnen.</value>
+    <comment>Instructional guideline text explaining valid modifier keys. Do not remove **bold** syntax, this will be displayed properly.</comment>
+  </data>
+  <data name="ShortcutCaptureDialog.Title" xml:space="preserve">
+    <value>Tastenkombinationen</value>
+    <comment>Title text displayed on the shortcut recording dialog window.</comment>
+  </data>
+  <data name="ShortcutCaptureDialog.CloseButtonText" xml:space="preserve">
+    <value>Abbrechen</value>
+    <comment>Dialog cancellation button text.</comment>
+  </data>
+  <data name="ShortcutCaptureDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Speichern</value>
+    <comment>Dialog confirmation button text to save configuration.</comment>
+  </data>
+  <data name="ShortcutCaptureDialog_ResetButtonText.Text" xml:space="preserve">
+    <value>Zurücksetzen</value>
+    <comment>Button text to reset shortcut settings to default values.</comment>
+  </data>
+  <data name="ShortcutCaptureDialog_ClearButtonText.Text" xml:space="preserve">
+    <value>Entfernen</value>
+    <comment>Button text to clear the currently assigned shortcut key.</comment>
+  </data>
+  <data name="ClickIntervalExpander_RandomOffsetLabel.Text" xml:space="preserve">
+    <value>Zufälliger Versatz (in ms)</value>
+    <comment>Visual label indicating the random offset option.</comment>
+  </data>
+  <data name="ClickIntervalExpander_RandomOffsetLabel.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Zufälliger Versatz in Millisekunden</value>
+    <comment>Screen reader automation name overriding the abbreviated text, keep fully expanded without “ms” unit abbreviation.</comment>
+  </data>
+  <data name="ClickIntervalExpander_RandomOffsetToggleSwitch.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Zufälliger Versatz aktivieren</value>
+    <comment>Screen reader automation name for the random offset toggle switch.</comment>
+  </data>
+  <data name="ClickOptionsExpander_ClickRepeatRadioButtons_CustomCountRadioButton.Content" xml:space="preserve">
+    <value>Benutzerdefinierte Anzahl</value>
+    <comment>Radio button content to choose how many times the autoclicker should click.</comment>
+  </data>
+  <data name="ClickOptionsExpander_ClickRepeatRadioButtons_ContinuouslyRadioButton.Content" xml:space="preserve">
+    <value>Fortlaufend</value>
+    <comment>Radio button content so the autoclicker clicks until you stop it manually.</comment>
+  </data>
+  <data name="ClickOptionsExpander_ClickRepeatRadioButtons.Header" xml:space="preserve">
+    <value>Klickwiederholung</value>
+    <comment>Header for the Click repeat radio buttons.</comment>
+  </data>
+  <data name="ClickOptionsExpander_CustomRepeatCountNumberBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Benutzerdefinierte Wiederholungsanzahl</value>
+    <comment>Screen reader name for the Custom repeat count number box.</comment>
   </data>
 </root>

@@ -43,6 +43,7 @@ namespace WinClicker.Services
                     {
                         Type typ when typ == typeof(string) => element.GetString(),
                         Type typ when typ == typeof(int) => element.GetInt32(),
+                        Type typ when typ == typeof(double) => element.GetDouble(),
                         Type typ when typ == typeof(bool) => element.GetBoolean(),
                         _ => null
                     };

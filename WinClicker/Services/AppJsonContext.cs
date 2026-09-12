@@ -15,6 +15,7 @@ namespace WinClicker.Services
     [JsonSerializable(typeof(object))]
     [JsonSerializable(typeof(string))]
     [JsonSerializable(typeof(int))]
+    [JsonSerializable(typeof(double))]
     [JsonSerializable(typeof(bool))]
     public partial class AppJsonContext : JsonSerializerContext
     {

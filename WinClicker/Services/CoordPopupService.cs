@@ -105,7 +105,7 @@ namespace WinClicker.Services
             }
         }
 
-        public void SetPositionFromScreenPoint(int screenX, int screenY, int offsetRight = 24, int offsetDown = 24)
+        public void SetPositionFromScreenPoint(int screenX, int screenY, int physicalOffsetRight = 32, int physicalOffsetDown = 32)
         {
             EnsureAppWindow();
 
@@ -117,6 +117,9 @@ namespace WinClicker.Services
             }
 
             double scale = _overlayWindow.Content.XamlRoot.RasterizationScale;
+
+            int offsetRight = (int)(physicalOffsetRight * scale);
+            int offsetDown = (int)(physicalOffsetDown * scale);
 
             int popupWidth = (int)(124 * scale);
             int popupHeight = (int)(64 * scale);

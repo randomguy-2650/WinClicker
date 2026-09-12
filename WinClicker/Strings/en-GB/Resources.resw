@@ -126,7 +126,7 @@
     <comment>Header for the combobox selecting where clicks should occur.</comment>
   </data>
   <data name="ClickCoordinatesExpander_ClickLocationComboBox_CurrentMouseLocationComboBoxItem.Content" xml:space="preserve">
-    <value>Current mouse position</value>
+    <value>Current mouse location</value>
     <comment>Combobox item to target the current mouse pointer position.</comment>
   </data>
   <data name="ClickCoordinatesExpander_ClickLocationComboBox_CustomCoordinatesComboBoxItem.Content" xml:space="preserve">
@@ -266,11 +266,11 @@
     <comment>Link text pointing to third‐party dependency disclosures.</comment>
   </data>
   <data name="ShortcutSettingsCard_ActionButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
-    <value>Customize shortcut</value>
+    <value>Customise shortcut</value>
     <comment>Hover tooltip text for the shortcut edit action button.</comment>
   </data>
   <data name="ShortcutSettingsCard_ActionButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
-    <value>Customize shortcut</value>
+    <value>Customise shortcut</value>
     <comment>Screen reader name for the shortcut edit action button.</comment>
   </data>
   <data name="ShortcutCaptureDialog_Description.Text" xml:space="preserve">
