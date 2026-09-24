@@ -42,7 +42,7 @@ namespace WinClicker.Services
                     object? value = property.PropertyType switch
                     {
                         Type typ when typ == typeof(string) => element.GetString(),
-                        Type typ when typ == typeof(int) => element.GetInt32(),
+                        Type typ when typ == typeof(int) => element.ValueKind == JsonValueKind.Number ? element.GetInt32() : 0,
                         Type typ when typ == typeof(double) => element.GetDouble(),
                         Type typ when typ == typeof(bool) => element.GetBoolean(),
                         _ => null

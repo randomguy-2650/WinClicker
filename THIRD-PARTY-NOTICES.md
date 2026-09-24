@@ -14,6 +14,16 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+### `CommunityToolkit.WinUI.Controls.Segmented` (8.2.251219)
+
+Copyright © .NET Foundation and contributors. All rights reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 ### `CommunityToolkit.WinUI.Controls.SettingsControls` (8.2.251219)
 
 Copyright © .NET Foundation and contributors. All rights reserved.
@@ -34,7 +44,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-### `Microsoft.WindowsAppSDK` (2.4.0)
+### `Microsoft.WindowsAppSDK` (2.5.1)
 
 Copyright © Microsoft Corporation
 
@@ -273,7 +283,7 @@ This limitation applies to (a) anything related to the software, services, conte
 
 It also applies even if Microsoft knew or should have known about the possibility of the damages. The above limitation or exclusion may not apply to you because your state, province, or country may not allow the exclusion or limitation of incidental, consequential, or other damages.
 
-### `Microsoft.WindowsAppSDK.AI` (2.4.4)
+### `Microsoft.WindowsAppSDK.AI` (2.5.5)
 
 #### MICROSOFT SOFTWARE LICENSE TERMS
 
@@ -738,7 +748,7 @@ This limitation applies to (a) anything related to the software, services, conte
 
 It also applies even if Microsoft knew or should have known about the possibility of the damages. The above limitation or exclusion may not apply to you because your state, province, or country may not allow the exclusion or limitation of incidental, consequential, or other damages.
 
-### `Microsoft.WindowsAppSDK.Foundation` (2.3.9)
+### `Microsoft.WindowsAppSDK.Foundation` (2.3.12)
 
 #### MICROSOFT SOFTWARE LICENSE TERMS
 
@@ -893,7 +903,7 @@ This limitation applies to (a) anything related to the software, services, conte
 
 It also applies even if Microsoft knew or should have known about the possibility of the damages. The above limitation or exclusion may not apply to you because your state, province, or country may not allow the exclusion or limitation of incidental, consequential, or other damages.
 
-### `Microsoft.WindowsAppSDK.InteractiveExperiences` (2.1.6)
+### `Microsoft.WindowsAppSDK.InteractiveExperiences` (2.1.9)
 
 #### MICROSOFT SOFTWARE LICENSE TERMS
 
@@ -1048,7 +1058,7 @@ This limitation applies to (a) anything related to the software, services, conte
 
 It also applies even if Microsoft knew or should have known about the possibility of the damages. The above limitation or exclusion may not apply to you because your state, province, or country may not allow the exclusion or limitation of incidental, consequential, or other damages.
 
-### `Microsoft.WindowsAppSDK.ML` (2.1.74)
+### `Microsoft.WindowsAppSDK.ML` (2.1.94)
 
 #### MICROSOFT SOFTWARE LICENSE TERMS
 
@@ -1205,7 +1215,7 @@ This limitation applies to (a) anything related to the software, services, conte
 
 It also applies even if Microsoft knew or should have known about the possibility of the damages. The above limitation or exclusion may not apply to you because your state, province, or country may not allow the exclusion or limitation of incidental, consequential, or other damages.
 
-### `Microsoft.WindowsAppSDK.Runtime` (2.4.0)
+### `Microsoft.WindowsAppSDK.Runtime` (2.5.1)
 
 #### MICROSOFT SOFTWARE LICENSE TERMS
 
@@ -1360,7 +1370,7 @@ This limitation applies to (a) anything related to the software, services, conte
 
 It also applies even if Microsoft knew or should have known about the possibility of the damages. The above limitation or exclusion may not apply to you because your state, province, or country may not allow the exclusion or limitation of incidental, consequential, or other damages.
 
-### `Microsoft.WindowsAppSDK.Search` (2.4.4)
+### `Microsoft.WindowsAppSDK.Search` (2.5.5)
 
 #### MICROSOFT SOFTWARE LICENSE TERMS
 
@@ -1670,7 +1680,7 @@ This limitation applies to (a) anything related to the software, services, conte
 
 It also applies even if Microsoft knew or should have known about the possibility of the damages. The above limitation or exclusion may not apply to you because your state, province, or country may not allow the exclusion or limitation of incidental, consequential, or other damages.
 
-### `Microsoft.WindowsAppSDK.WinUI` (2.3.6)
+### `Microsoft.WindowsAppSDK.WinUI` (2.3.9)
 
 #### MICROSOFT SOFTWARE LICENSE TERMS
 

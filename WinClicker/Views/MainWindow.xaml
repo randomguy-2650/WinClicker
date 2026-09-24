@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:WinClicker.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="using:CommunityToolkit.WinUI.Controls"
     xmlns:viewModels="using:WinClicker.ViewModels"
     xmlns:winuiex="using:WinUIEx"
     Title="WinClicker"
@@ -68,6 +69,7 @@
                     <ScrollView
                         Grid.Row="0"
                         HorizontalScrollBarVisibility="Auto"
+                        IsHitTestVisible="{x:Bind ViewModel.IsNotClicking, Mode=OneWay}"
                         VerticalScrollBarVisibility="Auto">
                         <Grid
                             Padding="16"
@@ -186,70 +188,35 @@
                             </Expander>
 
                             <!--  Click coordinates  -->
-                            <!--
-                                Width of 433 epx is derived from window width (480 epx) subtracted
-                                from the grid’s padding and the expander’s internal padding (14 epx in total).
-                                Result is 434 epx but because of subpixel rendering, 433 epx is safer.
-                            -->
                             <Expander
                                 x:Uid="ClickCoordinatesExpander"
                                 Grid.Row="1"
-                                Width="433"
                                 HorizontalAlignment="Stretch"
                                 HorizontalContentAlignment="Stretch">
                                 <StackPanel Orientation="Vertical" Spacing="16">
-                                    <Grid ColumnSpacing="8">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="180" />
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
+                                    <toolkit:Segmented
+                                        x:Uid="ClickCoordinatesExpander_ClickPositionSegmented"
+                                        HorizontalAlignment="Stretch"
+                                        SelectedIndex="{x:Bind ViewModel.CoordModeIndex, Mode=TwoWay}">
+                                        <toolkit:SegmentedItem x:Uid="ClickCoordinatesExpander_ClickPositionSegmented_CursorPositionSegmentedItem" />
+                                        <toolkit:SegmentedItem x:Uid="ClickCoordinatesExpander_ClickPositionSegmented_CustomCoordinatesSegmentedItem" />
+                                    </toolkit:Segmented>
 
-                                        <ComboBox
-                                            x:Name="CoordModeComboBox"
-                                            x:Uid="ClickCoordinatesExpander_ClickLocationComboBox"
-                                            Grid.Column="0"
-                                            MinWidth="180"
-                                            MaxWidth="180"
-                                            SelectedIndex="{x:Bind ViewModel.CoordModeIndex, Mode=TwoWay}">
-                                            <ComboBoxItem x:Uid="ClickCoordinatesExpander_ClickLocationCombobox_CurrentMouseLocationComboBoxItem" IsSelected="True" />
-                                            <ComboBoxItem x:Uid="ClickCoordinatesExpander_ClickLocationCombobox_CustomCoordinatesComboBoxItem" />
-                                        </ComboBox>
-
-                                        <Button
-                                            Grid.Column="1"
-                                            HorizontalAlignment="Stretch"
-                                            VerticalAlignment="Bottom"
-                                            Command="{x:Bind ViewModel.TeleportCommand}">
-                                            <TextBlock
-                                                x:Uid="ClickCoordinatesExpander_TeleportButton"
-                                                TextTrimming="CharacterEllipsis"
-                                                TextWrapping="NoWrap" />
-                                        </Button>
-                                        <Button
-                                            Grid.Column="2"
-                                            HorizontalAlignment="Stretch"
-                                            VerticalAlignment="Bottom"
-                                            Command="{x:Bind ViewModel.StartPickingCommand}">
-                                            <TextBlock
-                                                x:Uid="ClickCoordinatesExpander_PickCoordinatesButton"
-                                                TextTrimming="CharacterEllipsis"
-                                                TextWrapping="NoWrap" />
-                                        </Button>
-                                    </Grid>
                                     <Grid ColumnSpacing="8">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="32" />
+                                            <ColumnDefinition Width="32" />
                                         </Grid.ColumnDefinitions>
 
                                         <TextBox
                                             x:Name="XCoordTextBox"
                                             x:Uid="ClickCoordinatesExpander_XCoordinateTextBox"
-                                            Grid.Row="0"
                                             Grid.Column="0"
                                             HorizontalAlignment="Stretch"
                                             InputScope="Number"
+                                            IsEnabled="{x:Bind ViewModel.IsCustomCoords, Mode=OneWay}"
                                             MaxLength="4"
                                             Tag="9999"
                                             Text="{x:Bind ViewModel.XCoord, Mode=TwoWay}"
@@ -257,14 +224,45 @@
                                         <TextBox
                                             x:Name="YCoordTextBox"
                                             x:Uid="ClickCoordinatesExpander_YCoordinateTextBox"
-                                            Grid.Row="0"
                                             Grid.Column="1"
                                             HorizontalAlignment="Stretch"
                                             InputScope="Number"
+                                            IsEnabled="{x:Bind ViewModel.IsCustomCoords, Mode=OneWay}"
                                             MaxLength="4"
                                             Tag="9999"
                                             Text="{x:Bind ViewModel.YCoord, Mode=TwoWay}"
                                             TextChanged="TextBox_TextChanged" />
+
+                                        <Button
+                                            x:Uid="ClickCoordinatesExpander_TeleportButton"
+                                            Grid.Column="2"
+                                            Height="32"
+                                            Padding="0"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Bottom"
+                                            Command="{x:Bind ViewModel.TeleportCommand}"
+                                            IsEnabled="{x:Bind ViewModel.IsCustomCoords, Mode=OneWay}">
+                                            <FontIcon
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                FontSize="16"
+                                                Glyph="&#xF272;" />
+                                        </Button>
+                                        <Button
+                                            x:Uid="ClickCoordinatesExpander_PickCoordinatesButton"
+                                            Grid.Column="3"
+                                            Height="32"
+                                            Padding="0"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Bottom"
+                                            Command="{x:Bind ViewModel.StartPickingCommand}"
+                                            IsEnabled="{x:Bind ViewModel.IsCustomCoords, Mode=OneWay}">
+                                            <FontIcon
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                FontSize="16"
+                                                Glyph="&#xE8B0;" />
+                                        </Button>
                                     </Grid>
                                 </StackPanel>
                             </Expander>
@@ -346,7 +344,6 @@
                                     <Button
                                         x:Uid="ShortcutSettingsCard_ActionButton"
                                         Command="{x:Bind ViewModel.OpenShortcutDialogCommand}"
-                                        IsEnabled="{x:Bind ViewModel.IsNotClicking, Mode=OneWay}"
                                         Style="{StaticResource ExpanderCardButtonStyle}">
                                         <FontIcon FontSize="12" Glyph="&#xE70F;" />
                                     </Button>

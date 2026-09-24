@@ -3,6 +3,7 @@ using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using WinClicker.Services;
@@ -66,6 +67,8 @@ namespace WinClicker.Views
             IsAlwaysOnTop = true;
             ExtendsContentIntoTitleBar = true;
             SetTitleBar(AppTitleBar);
+
+            this.CenterOnScreen();
 
             var presenter = AppWindow.Presenter as OverlappedPresenter;
 

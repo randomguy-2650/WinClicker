@@ -87,24 +87,65 @@
                         Margin="0,8,0,0"
                         Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                         IsTextSelectionEnabled="True"
-                        Text="2.0.0" />
+                        Text="2.1.0" />
 
                     <controls:SettingsExpander.Items>
-                        <controls:SettingsCard>
-                            <StackPanel>
+                        <controls:SettingsCard
+                            x:Uid="SettingsView_WinClickerSettingsExpander_GitHubRepositorySettingsCard"
+                            Click="GitHubRepositorySettingsCard_Click"
+                            IsClickEnabled="True"
+                            ToolTipService.ToolTip="https://github.com/randomguy-2650/WinClicker">
+                            <controls:SettingsCard.ActionIcon>
+                                <FontIcon Glyph="&#xE8A7;" />
+                            </controls:SettingsCard.ActionIcon>
+                        </controls:SettingsCard>
+                        <controls:SettingsCard
+                            x:Uid="SettingsView_WinClickerSettingsExpander_ReportIssueSettingsCard"
+                            Click="ReportIssueSettingsCard_Click"
+                            IsClickEnabled="True"
+                            ToolTipService.ToolTip="https://github.com/randomguy-2650/WinClicker/issues/new/choose">
+                            <controls:SettingsCard.ActionIcon>
+                                <FontIcon Glyph="&#xE8A7;" />
+                            </controls:SettingsCard.ActionIcon>
+                        </controls:SettingsCard>
+                        <controls:SettingsCard
+                            x:Uid="SettingsView_WinClickerSettingsExpander_DependenciesAndReferencesSettingsCard"
+                            HorizontalContentAlignment="Left"
+                            ContentAlignment="Vertical">
+                            <StackPanel Margin="-12,0,0,0" Orientation="Vertical">
                                 <HyperlinkButton
-                                    x:Uid="SettingsView_WinClickerSettingsExpander_GitHubRepositoryHyperlinkButton"
-                                    Margin="-12,0,0,0"
-                                    NavigateUri="https://github.com/randomguy-2650/WinClicker"
-                                    ToolTipService.ToolTip="https://github.com/randomguy-2650/WinClicker" />
+                                    Content="Windows App SDK"
+                                    NavigateUri="https://github.com/microsoft/WindowsAppSDK"
+                                    ToolTipService.ToolTip="https://github.com/microsoft/WindowsAppSDK" />
                                 <HyperlinkButton
-                                    x:Uid="SettingsView_WinClickerSettingsExpander_MITLicenseHyperlinkButton"
-                                    Margin="-12,0,0,0"
+                                    Content="WinUI 3"
+                                    NavigateUri="https://learn.microsoft.com/en-us/windows/apps/winui/winui3"
+                                    ToolTipService.ToolTip="https://learn.microsoft.com/en-us/windows/apps/winui/winui3" />
+                                <HyperlinkButton
+                                    Content="Windows Community Toolkit"
+                                    NavigateUri="https://learn.microsoft.com/en-us/dotnet/communitytoolkit/windows"
+                                    ToolTipService.ToolTip="https://learn.microsoft.com/en-us/dotnet/communitytoolkit/windows" />
+                                <HyperlinkButton
+                                    Content="Microsoft XAML Behaviors"
+                                    NavigateUri="https://github.com/microsoft/XamlBehaviors"
+                                    ToolTipService.ToolTip="https://github.com/microsoft/XamlBehaviors" />
+                                <HyperlinkButton
+                                    Content="WinUIEx"
+                                    NavigateUri="https://github.com/dotMorten/WinUIEx"
+                                    ToolTipService.ToolTip="https://github.com/dotMorten/WinUIEx" />
+                            </StackPanel>
+                        </controls:SettingsCard>
+                        <controls:SettingsCard
+                            x:Uid="SettingsView_WinClickerSettingsExpander_LegalSettingsCard"
+                            HorizontalContentAlignment="Left"
+                            ContentAlignment="Vertical">
+                            <StackPanel Margin="-12,0,0,0" Orientation="Vertical">
+                                <HyperlinkButton
+                                    x:Uid="SettingsView_WinClickerSettingsExpander_LegalSettingsCard_MITLicenseHyperlinkButton"
                                     NavigateUri="https://github.com/randomguy-2650/WinClicker/tree/main/LICENSE.md"
                                     ToolTipService.ToolTip="https://github.com/randomguy-2650/WinClicker/tree/main/LICENSE.md" />
                                 <HyperlinkButton
-                                    x:Uid="SettingsView_WinClickerSettingsExpander_ThirdPartyNoticesHyperlinkButton"
-                                    Margin="-12,0,0,0"
+                                    x:Uid="SettingsView_WinClickerSettingsExpander_LegalSettingsCard_ThirdPartyNoticesHyperlinkButton"
                                     NavigateUri="https://github.com/randomguy-2650/WinClicker/tree/main/THIRD-PARTY-NOTICES.md"
                                     ToolTipService.ToolTip="https://github.com/randomguy-2650/WinClicker/tree/main/THIRD-PARTY-NOTICES.md" />
                             </StackPanel>

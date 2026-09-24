@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using Windows.System;
 using WinClicker.Models;
 
@@ -38,6 +39,25 @@ namespace WinClicker.ViewModels
 
         [LibraryImport("kernel32.dll", EntryPoint = "GetModuleHandleW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
         private static partial IntPtr GetModuleHandle(string? lpModuleName);
+
+        [LibraryImport("user32.dll", EntryPoint = "GetKeyboardLayout")]
+        private static partial IntPtr GetKeyboardLayout(uint idThread);
+
+        [LibraryImport("user32.dll", EntryPoint = "MapVirtualKeyExW", SetLastError = true)]
+        private static partial uint MapVirtualKeyEx(uint uCode, uint uMapType, IntPtr dwhkl);
+
+        [LibraryImport("user32.dll", EntryPoint = "ToUnicodeEx", SetLastError = true)]
+        private static partial int ToUnicodeEx(
+            uint wVirtKey,
+            uint wScanCode,
+            [In] byte[] lpKeyState,
+            char* pwszBuff,
+            int cchBuff,
+            uint wFlags,
+            IntPtr dwhkl);
+
+        [LibraryImport("user32.dll", EntryPoint = "VkKeyScanExW", SetLastError = true)]
+        private static partial short VkKeyScanEx(ushort ch, IntPtr dwhkl);
 
         [ObservableProperty]
         public partial ObservableCollection<ShortcutKeyItem> KeyCaps { get; set; } = [];
@@ -80,6 +100,7 @@ namespace WinClicker.ViewModels
             if (_hookId != IntPtr.Zero)
             {
                 UnhookWindowsHookEx(_hookId);
+
                 _hookId = IntPtr.Zero;
             }
         }
@@ -236,7 +257,7 @@ namespace WinClicker.ViewModels
                 return (VirtualKey)((int)VirtualKey.Number0 + (text[0] - '0'));
             }
 
-            return text switch
+            VirtualKey? namedKey = text switch
             {
                 "Ctrl" => VirtualKey.Control,
                 "Shift" => VirtualKey.Shift,
@@ -247,21 +268,36 @@ namespace WinClicker.ViewModels
                 "Arrow Left" or "←" => VirtualKey.Left,
                 "Arrow Right" or "→" => VirtualKey.Right,
                 "Tab" => VirtualKey.Tab,
-                "+" => (VirtualKey)187,
-                "-" => (VirtualKey)189,
-                "," => (VirtualKey)188,
-                "." => (VirtualKey)190,
-                "/" => (VirtualKey)191,
-                ";" => (VirtualKey)186,
-                "'" => (VirtualKey)222,
-                "[" => (VirtualKey)219,
-                "]" => (VirtualKey)221,
-                "\\" => (VirtualKey)220,
-                "~" => (VirtualKey)192,
-                var p when p.StartsWith('F') && int.TryParse(p[1..], out int fNum) && fNum is >= 1 and <= 24 => (VirtualKey)((int)VirtualKey.F1 + fNum - 1),
-                var p when p.Length == 1 && Enum.TryParse<VirtualKey>(p.ToUpper(), out var vk) => vk,
                 _ => null
             };
+
+            if (namedKey.HasValue)
+            {
+                return namedKey.Value;
+            }
+
+            if (text.Length == 1)
+            {
+                try
+                {
+                    IntPtr hkl = GetKeyboardLayout(0);
+
+                    short vkScan = VkKeyScanEx((ushort)text[0], hkl);
+
+                    if (vkScan != -1)
+                    {
+                        return (VirtualKey)(vkScan & 0xFF);
+                    }
+                }
+                catch { }
+            }
+
+            if (Enum.TryParse<VirtualKey>(text, true, out var vkEnum))
+            {
+                return vkEnum;
+            }
+
+            return null;
         }
 
         private static ShortcutKeyItem MapKeyToItem(VirtualKey key)
@@ -283,65 +319,73 @@ namespace WinClicker.ViewModels
                 return new ShortcutKeyItem("Volume Up", 5);
             }
 
+            if (key >= VirtualKey.NumberPad0 && key <= VirtualKey.NumberPad9)
+            {
+                int num = (int)key - (int)VirtualKey.NumberPad0;
+
+                return new ShortcutKeyItem($"NumKey {num}", 5);
+            }
+
             return key switch
             {
                 VirtualKey.LeftWindows or VirtualKey.RightWindows => new ShortcutKeyItem(
                     "Windows", 1,
                     iconGeometry: (Geometry)Microsoft.UI.Xaml.Markup.XamlBindingHelper.ConvertValue(
-                        typeof(Geometry), "M 0,2 L 7,2 L 7,9 L 0,9 Z M 8,2 L 15,2 L 15,9 L 8,9 Z M 0,10 L 7,10 L 7,17 L 0,17 Z M 8,10 L 15,10 L 15,17 L 8,17 Z")),
+                        typeof(Geometry),
+                        "M 0,0 L 7.5,0 L 7.5,7.5 L 0,7.5 Z M 8.5,0 L 16,0 L 16,7.5 L 8.5,7.5 Z M 0,8.5 L 7.5,8.5 L 7.5,16 L 0,16 Z M 8.5,8.5 L 16,8.5 L 16,16 L 8.5,16 Z"
+                    )
+                ),
                 VirtualKey.Control => new ShortcutKeyItem("Ctrl", 2),
                 VirtualKey.Menu => new ShortcutKeyItem("Alt", 3),
                 VirtualKey.Shift => new ShortcutKeyItem("Shift", 4, glyph: "\xE752"),
+                VirtualKey.CapitalLock => new ShortcutKeyItem("Caps Lock", 5),
+                VirtualKey.NumberKeyLock => new ShortcutKeyItem("Num Lock", 5),
+                VirtualKey.Back => new ShortcutKeyItem("Backspace", 5, glyph: "\xE750"),
                 VirtualKey.Up => new ShortcutKeyItem("Arrow Up", 5, glyph: "\xE74A"),
                 VirtualKey.Down => new ShortcutKeyItem("Arrow Down", 5, glyph: "\xE74B"),
                 VirtualKey.Left => new ShortcutKeyItem("Arrow Left", 5, glyph: "\xE72B"),
                 VirtualKey.Right => new ShortcutKeyItem("Arrow Right", 5, glyph: "\xE72A"),
                 VirtualKey.Tab => new ShortcutKeyItem("Tab", 5, glyph: "\xE7FD"),
                 VirtualKey.Enter => new ShortcutKeyItem("Enter", 5, glyph: "\xE751"),
-                _ => new ShortcutKeyItem(ResolveKeyName(key), 5)
+                _ => new ShortcutKeyItem(GetLayoutAwareKeyName(key), 5)
             };
         }
 
-        private static string ResolveKeyName(VirtualKey key)
+        private static unsafe string GetLayoutAwareKeyName(VirtualKey key)
         {
-            return (int)key switch
+            if (IsModifier(key) || IsFunctionKey(key))
             {
-                173 => "Mute",
-                186 => ";",
-                187 => "+",
-                188 => ",",
-                189 => "-",
-                190 => ".",
-                191 => "/",
-                192 => "~",
-                219 => "[",
-                220 => "\\",
-                221 => "]",
-                222 => "'",
-                _ => GetDefaultKeyString(key)
-            };
-        }
-
-        private static string GetDefaultKeyString(VirtualKey key)
-        {
-            string name = key.ToString();
-
-            if (name.StartsWith("NumberPad"))
-            {
-                return name.Replace("NumberPad", "NumPad ");
+                return key.ToString();
             }
 
-            if (name.StartsWith("Digit"))
+            try
             {
-                return name.Replace("Digit", "");
+                byte[] cleanKeyboardState = new byte[256];
+                IntPtr hkl = GetKeyboardLayout(0);
+                uint scanCode = MapVirtualKeyEx((uint)key, 0, hkl);
+
+                char* buffer = stackalloc char[5];
+
+                int result = ToUnicodeEx((uint)key, scanCode, cleanKeyboardState, buffer, 5, 4, hkl);
+
+                if (result != 0)
+                {
+                    int length = Math.Abs(result);
+
+                    string text = new(buffer, 0, length);
+
+                    if (!string.IsNullOrWhiteSpace(text))
+                    {
+                        return text.ToUpperInvariant();
+                    }
+                }
+            }
+            catch
+            {
+                // Fallback to standard name if translation fails
             }
 
-            if (name.StartsWith("Number"))
-            {
-                return name.Replace("Number", "");
-            }
-
-            return name;
+            return key.ToString();
         }
     }
 }

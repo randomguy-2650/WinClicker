@@ -82,7 +82,10 @@ namespace WinClicker.ViewModels
         [ObservableProperty] public partial string XCoord { get; set; } = "0";
         [ObservableProperty] public partial string YCoord { get; set; } = "0";
 
-        [ObservableProperty] public partial int CoordModeIndex { get; set; } = 0;
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsCustomCoords))]
+        public partial int CoordModeIndex { get; set; } = 0; // 0: Cursor position, 1: Custom coordinates
+        public bool IsCustomCoords => CoordModeIndex == 1;
 
         [ObservableProperty] public partial int MouseButtonIndex { get; set; } = 0; // 0: Left, 1: Right, 2: Middle
         [ObservableProperty] public partial int ClickTypeIndex { get; set; } = 0; // 0: Single, 1: Double

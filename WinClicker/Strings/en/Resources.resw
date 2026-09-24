@@ -121,25 +121,21 @@
     <value>Click coordinates</value>
     <comment>Header text for the Click coordinates expander.</comment>
   </data>
-  <data name="ClickCoordinatesExpander_ClickLocationComboBox.Header" xml:space="preserve">
-    <value>Click location</value>
-    <comment>Header for the combobox selecting where clicks should occur.</comment>
+  <data name="ClickCoordinatesExpander_ClickPositionSegmented.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Click position</value>
+    <comment>Header for the segmented control selecting where clicks should occur.</comment>
   </data>
-  <data name="ClickCoordinatesExpander_ClickLocationComboBox_CurrentMouseLocationComboBoxItem.Content" xml:space="preserve">
-    <value>Current mouse position</value>
-    <comment>Combobox item to target the current mouse pointer position.</comment>
-  </data>
-  <data name="ClickCoordinatesExpander_ClickLocationComboBox_CustomCoordinatesComboBoxItem.Content" xml:space="preserve">
+  <data name="ClickCoordinatesExpander_ClickPositionSegmented_CustomCoordinatesSegmentedItem.Content" xml:space="preserve">
     <value>Custom coordinates</value>
-    <comment>Combobox item to interactively pick screen coordinates.</comment>
+    <comment>Segmented item to set custom click coordinates.</comment>
   </data>
-  <data name="ClickCoordinatesExpander_PickCoordinatesButton.Text" xml:space="preserve">
-    <value>Pick coordinates</value>
-    <comment>Button text to interactively pick screen coordinates.</comment>
-  </data>
-  <data name="ClickCoordinatesExpander_TeleportButton.Text" xml:space="preserve">
+  <data name="ClickCoordinatesExpander_TeleportButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Teleport</value>
-    <comment>Button text to instantly teleport the mouse pointer to the set coordinates.</comment>
+    <comment>Screen reader name for the button to instantly teleport the mouse pointer to the set coordinates.</comment>
+  </data>
+  <data name="ClickCoordinatesExpander_TeleportButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Teleport</value>
+    <comment>Hover tooltip text for the button to instantly teleport the mouse pointer to the set coordinates.</comment>
   </data>
   <data name="ClickCoordinatesExpander_XCoordinateTextBox.Header" xml:space="preserve">
     <value>X‐coordinate</value>
@@ -253,15 +249,11 @@
     <value>© 2026 randomguy-2650 and his contributors</value>
     <comment>Copyright notice and version info footer string</comment>
   </data>
-  <data name="SettingsView_WinClickerSettingsExpander_GitHubRepositoryHyperlinkButton.Content" xml:space="preserve">
-    <value>GitHub repository</value>
-    <comment>Link text pointing to the GitHub repository.</comment>
-  </data>
-  <data name="SettingsView_WinClickerSettingsExpander_MITLicenseHyperlinkButton.Content" xml:space="preserve">
+  <data name="SettingsView_WinClickerSettingsExpander_LegalSettingsCard_MITLicenseHyperlinkButton.Content" xml:space="preserve">
     <value>MIT License</value>
     <comment>Link text pointing to the software licensing details.</comment>
   </data>
-  <data name="SettingsView_WinClickerSettingsExpander_ThirdPartyNoticesHyperlinkButton.Content" xml:space="preserve">
+  <data name="SettingsView_WinClickerSettingsExpander_LegalSettingsCard_ThirdPartyNoticesHyperlinkButton.Content" xml:space="preserve">
     <value>Third‐party notices</value>
     <comment>Link text pointing to third‐party dependency disclosures.</comment>
   </data>
@@ -324,5 +316,33 @@
   <data name="ClickOptionsExpander_CustomRepeatCountNumberBox.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
     <value>Custom repeat count</value>
     <comment>Screen reader name for the Custom repeat count number box.</comment>
+  </data>
+  <data name="SettingsView_WinClickerSettingsExpander_GitHubRepositorySettingsCard.Header" xml:space="preserve">
+    <value>GitHub repository</value>
+    <comment>Settings card link to the GitHub repository.</comment>
+  </data>
+  <data name="SettingsView_WinClickerSettingsExpander_ReportIssueSettingsCard.Header" xml:space="preserve">
+    <value>Report an issue on GitHub</value>
+    <comment>Settings card link to report an issue on GitHub.</comment>
+  </data>
+  <data name="SettingsView_WinClickerSettingsExpander_DependenciesAndReferencesSettingsCard.Header" xml:space="preserve">
+    <value>Dependencies &amp; references</value>
+    <comment>Settings card listing links to top‐level dependencies and references.</comment>
+  </data>
+  <data name="SettingsView_WinClickerSettingsExpander_LegalSettingsCard.Header" xml:space="preserve">
+    <value>Legal</value>
+    <comment>Settings card listing links to legal notices.</comment>
+  </data>
+  <data name="ClickCoordinatesExpander_PickCoordinatesButton.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Pick coordinates</value>
+    <comment>Screen reader name for the button to interactively pick screen coordinates.</comment>
+  </data>
+  <data name="ClickCoordinatesExpander_PickCoordinatesButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Pick coordinates</value>
+    <comment>Hover tooltip text for the button to interactively pick screen coordinates.</comment>
+  </data>
+  <data name="ClickCoordinatesExpander_ClickPositionSegmented_CursorPositionSegmentedItem.Content" xml:space="preserve">
+    <value>Cursor position</value>
+    <comment>Segmented item to target the current cursor position.</comment>
   </data>
 </root>

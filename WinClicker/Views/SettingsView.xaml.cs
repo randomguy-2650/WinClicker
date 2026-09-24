@@ -1,5 +1,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System;
+using Windows.System;
 using WinClicker.Services;
 using WinClicker.ViewModels;
 
@@ -34,6 +36,16 @@ namespace WinClicker.Views
         public void FocusTitle()
         {
             SettingsTitle.Focus(FocusState.Programmatic);
+        }
+
+        private async void GitHubRepositorySettingsCard_Click(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("https://github.com/randomguy-2650/WinClicker"));
+        }
+
+        private async void ReportIssueSettingsCard_Click(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("https://github.com/randomguy-2650/WinClicker/issues/new/choose"));
         }
     }
 }
