@@ -1,6 +1,6 @@
 <picture align="center">
     <img
-        src="../Assets/cover-image-de.png"
+        src="../../Assets/cover-image-de.png"
         alt=""
     />
 </picture>
@@ -15,7 +15,7 @@
 <details>
     <summary>🌐 Sprache auswählen</summary>
     <ul>
-        <li><a href="../README.md">🇬🇧 English</a></li>
+        <li><a href="../../README.md">🇬🇧 English</a></li>
     </ul>
 </details>
 
@@ -27,7 +27,7 @@ Entpacke den Inhalt in einen Ordner deiner Wahl und starte die darin enthaltene 
 
 Dies funktioniert möglicherweise nicht, wenn du [Smart App Control](https://learn.microsoft.com/de-de/windows/apps/develop/smart-app-control/overview) oder [AppLocker](https://learn.microsoft.com/de-de/windows/security/application-security/application-control/app-control-for-business/applocker/applocker-overview) verwendest, strenge Unternehmenseinstellungen vorgenommen hast oder dein Antivirenprogramm das Programm blockiert (füge in diesem Fall den entpackten Ordner zur Blocklist deines Antivirenprogramms hinzu).
 
-_Bewahre bitte die mitgelieferten [`LICENSE.md`](../LICENSE.md)‐ und [`THIRD-PARTY-NOTICES.md`](../THIRD-PARTY-NOTICES.md)‐Dateien im selben Ordner wie die Anwendung auf._
+_Bewahre bitte die mitgelieferten [`LICENSE.md`](../../LICENSE.md)‐ und [`THIRD-PARTY-NOTICES.md`](../../THIRD-PARTY-NOTICES.md)‐Dateien im selben Ordner wie die Anwendung auf._
 
 ## 💻 Unterstützte Betriebssysteme
 
@@ -47,7 +47,7 @@ Lade [Visual Studio 2026](https://visualstudio.microsoft.com/downloads) herunter
 
 Installiere die **WinUI application development**‐Workload und kreuze das neueste Windows 11 SDK an.
 
-![Screenshot des „Modifizieren“‐Fensters im Visual Studio Installer](../Assets/visual-studio-modify-window.png)
+![Screenshot des „Modifizieren“‐Fensters im Visual Studio Installer](../../Assets/visual-studio-modify-window.png)
 
 Installiere die [XAML Styler](https://marketplace.visualstudio.com/items?itemName=TeamXavalon.XAMLStyler)‐Erweiterung aus dem Visual Studio Marketplace.
 
@@ -65,7 +65,7 @@ Dieses Projekt folgt dem [Placer Style Guide](https://github.com/placer-toolkit/
 
 ## 📄 Lizenz
 
-Dieses Projekt ist unter der [MIT‐Lizenz](../LICENSE.md) lizenziert. Marketing‐Assets sind urheberrechtlich geschützt und fallen nicht unter die MIT‐Lizenz.
+Dieses Projekt ist unter der [MIT‐Lizenz](../../LICENSE.md) lizenziert. Marketing‐Assets sind urheberrechtlich geschützt und fallen nicht unter die MIT‐Lizenz.
 
 Abhängigkeiten unterliegen ihren jeweiligen Lizenzen und verwenden möglicherweise nicht die für dieses Projekt verwendete MIT‐Lizenz.
 

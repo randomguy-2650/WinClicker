@@ -1,10 +1,24 @@
 root = true
 
-# These settings below apply to all files
+# All files
 [*]
-end_of_line = crlf
-insert_final_newline = true
-trim_trailing_whitespace = true
 charset = utf-8
+end_of_line = crlf
 indent_style = space
 indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# C# files
+[*.cs]
+csharp_new_line_before_catch = true
+csharp_new_line_before_else = true
+csharp_new_line_before_finally = true
+csharp_new_line_before_open_brace = methods, properties, types, control_flow
+csharp_prefer_braces = true:error
+dotnet_sort_system_directives_first = true
+dotnet_style_namespace_declarations = block_scoped:error
+
+# Python files
+[*.py]
+max_line_length = 79

@@ -14,7 +14,7 @@
 <details>
     <summary>🌐 Choose language</summary>
     <ul>
-        <li><a href="./Translations/README.de.md">🇩🇪 Deutsch</a></li>
+        <li><a href="./Translations/de/README.md">🇩🇪 Deutsch</a></li>
     </ul>
 </details>
 

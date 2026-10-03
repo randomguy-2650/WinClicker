@@ -1,6 +1,11 @@
 # Security
 
-<!-- Do not translate this file. -->
+<details>
+    <summary>🌐 Choose language</summary>
+    <ul>
+        <li><a href="./Translations/de/SECURITY.md">🇩🇪 Deutsch</a></li>
+    </ul>
+</details>
 
 We take security of WinClicker seriously. This explains how to report issues and what you can expect from us.
 
@@ -9,7 +14,7 @@ We take security of WinClicker seriously. This explains how to report issues and
 If you discover a security vulnerability in WinClicker, please help by reporting it responsibly.
 
 - Do not open a public issue, pull request or discussion.
-- Instead, please use GitHub’s [private vulnerability reporting](https://docs.github.com/en/code-security/security-advisories) feature.
+- Instead, please use GitHub’s [private vulnerability reporting](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately) feature.
 
 ### 📝 What to include
 
